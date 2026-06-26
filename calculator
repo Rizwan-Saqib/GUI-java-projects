@@ -1,1 +1,46 @@
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+class calculator extends JFrame implements ActionListener{
+JButton btn1 ,btn2;
+public calculator(){
+setSize(400,600);
+setLayout(null);
+btn1 = new JButton("Button1");
+    btn1.setBounds(60, 120, 100, 30);
+    btn1.setBackground(Color.LIGHT_GRAY);
+    btn2 = new JButton("Button2");
+    btn2.setBounds(180, 120, 100, 30);
+    add(btn1);
+    add(btn2);
+    btn1.addActionListener(this);
+      btn2.addActionListener(this);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    setVisible(true);
+
+}
+@Override
+public void actionPerformed(ActionEvent e ){
+    if(e.getSource()==btn1){
+        JOptionPane.showMessageDialog(null, "BUtton 1 clicked");
+
+    }
+    if(e.getSource() == btn2){
+        JOptionPane.showMessageDialog(null, "BUTTON2 CLICKED");
+
+    }
+
+
+}
+public static void main(String args[]){
+new calculator();
+}
+
+}

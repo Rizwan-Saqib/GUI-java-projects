@@ -1,5 +1,3 @@
-
-
 class calculator extends JFrame implements ActionListener{
 JButton btn1 ,btn2;
 public calculator(){

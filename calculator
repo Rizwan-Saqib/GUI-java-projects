@@ -1,36 +1,93 @@
-class calculator extends JFrame implements ActionListener{
-JButton btn1 ,btn2;
-public calculator(){
-setSize(400,600);
-setLayout(null);
-btn1 = new JButton("Button1");
-    btn1.setBounds(60, 120, 100, 30);
-    btn1.setBackground(Color.LIGHT_GRAY);
-    btn2 = new JButton("Button2");
-    btn2.setBounds(180, 120, 100, 30);
-    add(btn1);
-    add(btn2);
-    btn1.addActionListener(this);
-      btn2.addActionListener(this);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setVisible(true);
+import javax.swing.*;
+import javax.swing.plaf.BorderUIResource;
 
-}
-@Override
-public void actionPerformed(ActionEvent e ){
-    if(e.getSource()==btn1){
-        JOptionPane.showMessageDialog(null, "BUtton 1 clicked");
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * Calculator11
+ */
+public class Calculator11 {
+    static JTextField field = new JTextField();
+    static int num1 = 0;
+    static int num2 = 0;
+    static String operator = "";
+
+    public static void main(String args[]) {
+
+        JFrame frame = new JFrame(" Calculator ");
+        frame.setSize(300, 450);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        field.setPreferredSize(new Dimension(290, 40));
+        field.setEditable(false);
+        field.setBorder(BorderUIResource.getBlackLineBorderUIResource());
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setLayout(new GridLayout(4, 4, 5, 5)); // numbers ke liye
+        String[] nums = {
+
+                "1", "2", "3", "+",
+                "4", "5", "6", "-",
+                "7", "8", "9", "*",
+                "=", "0", "C", "/",
+        };
+        for (String n : nums) {
+            JButton btn = new JButton(n);
+            btn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+
+                    String clicked = e.getActionCommand();
+                    if (clicked.equals("C")) {
+
+                        field.setText("");
+                    }else  if (clicked.equals("+") || clicked.equals("-") || clicked.equals("*")
+                            || clicked.equals("/")) {
+                        operator = clicked;
+                        num1 = Integer.parseInt(field.getText());
+                        field.setText("");
+
+                    } else if (clicked.equals("=")) {
+                       num2 = Integer.parseInt(field.getText());
+                        switch (operator) {
+                            
+                            case "+":
+                                
+                                field.setText(String.valueOf(num1 + num2));
+                                break;
+                            case "-":
+                                field.setText(String.valueOf(num1 - num2));
+                                break;
+                            case "*":
+                            field.setText(String.valueOf(num1 * num2));
+                                break;
+                            case "/":
+                            field.setText(String.valueOf(num1 / num2));
+                                break;
+
+                            default:
+                                field.setText("Invlid Input");
+                                break;
+                        }
+
+                    }else{
+                                            field.setText(field.getText() + e.getActionCommand());
+
+                    }
+
+                }
+            });
+            btn.setFont(new Font("Arial", Font.ROMAN_BASELINE, 22));
+            btn.setForeground(Color.BLACK);
+            btn.setBackground(Color.WHITE); 
+            btn.setFocusPainted(true);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            panel.add(btn);
+        }
+
+        frame.getContentPane().setBackground(Color.black);
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setVisible(true);
+        frame.add(field, BorderLayout.NORTH);
     }
-    if(e.getSource() == btn2){
-        JOptionPane.showMessageDialog(null, "BUTTON2 CLICKED");
-
-    }
-
-
-}
-public static void main(String args[]){
-new calculator();
-}
-
 }

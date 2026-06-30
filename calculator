@@ -5,9 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Calculator11
- */
+
 public class Calculator11 {
     static JTextField field = new JTextField();
     static int num1 = 0;
